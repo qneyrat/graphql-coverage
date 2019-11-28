@@ -1,0 +1,1215 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+			.cov1 { color: rgb(128, 128, 128) }
+			.cov2 { color: rgb(116, 140, 131) }
+			.cov3 { color: rgb(104, 152, 134) }
+			.cov4 { color: rgb(92, 164, 137) }
+			.cov5 { color: rgb(80, 176, 140) }
+			.cov6 { color: rgb(68, 188, 143) }
+			.cov7 { color: rgb(56, 200, 146) }
+			.cov8 { color: rgb(44, 212, 149) }
+			.cov9 { color: rgb(32, 224, 152) }
+			.cov10 { color: rgb(20, 236, 155) }
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="legend">
+				<span>not tracked</span>
+				<span class="cov0">no coverage</span>
+				<span class="cov1">low coverage</span>
+				<span class="cov2">*</span>
+				<span class="cov3">*</span>
+				<span class="cov4">*</span>
+				<span class="cov5">*</span>
+				<span class="cov6">*</span>
+				<span class="cov7">*</span>
+				<span class="cov8">*</span>
+				<span class="cov9">*</span>
+				<span class="cov10">high coverage</span>
+			</div>
+		</div>
+		<div id="content">
+		    <pre>
+ # Liste d'articles
+  type ArticlesConnector {
+    # Nombre d'articles
+  <span class="cov10" title="1">  total: Int!</span>
+    # Eléments de la liste
+  <span class="cov10" title="1">  items: [Article!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Liste de liens de rebonds freemium
+  type CategoryConnector {
+    # Nombre total de programmes pour la categorie
+  <span class="cov10" title="1">  total: Int!</span>
+    # Poids de la liste (à utiliser pour ordonner les éléments)
+  <span class="cov10" title="1">  weight: Int!</span>
+    # Décoration associée aux liens freemium
+  <span class="cov10" title="1">  mainCategory: Category</span>
+    # Les sous-catégories
+  <span class="cov10" title="1">  subCategories: [SubCategory!]</span>
+  }
+  # Liste de liens de rebonds freemium
+  type FreemiumsConnector {
+    # Nombre total de liens
+  <span class="cov0" title="0">  total: Int!</span>
+    # Décoration associée aux liens freemium
+  <span class="cov0" title="0">  decoration: Decoration</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [FreemiumLink!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+    # Clé d'identification du bloc
+  <span class="cov0" title="0">  key: String</span>
+  }
+  # Liste de lives
+  type LiveConnector {
+    # Nombre de live
+  <span class="cov0" title="0">  total: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [Live!]</span>
+    # Poids de la liste (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+    # Clé d'identification du bloc
+  <span class="cov0" title="0">  key: String</span>
+  }
+  # Liste de personnalités
+  type PersonalitiesConnector {
+    # Nombre de personnalités
+  <span class="cov0" title="0">  total: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [Personality!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Liste de playlists
+  type PlayListsConnector {
+    # Nombre de playlist
+  <span class="cov0" title="0">  total: Int!</span>
+    # Poids de la liste (à utiliser pour ordonner les éléments).
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [PlayList!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+  }
+  # Liste de programmes
+  type ProgramsConnector {
+    # Nombre de programmes
+  <span class="cov10" title="1">  total: Int!</span>
+    # Categories des programmes
+  <span class="cov0" title="0">  categories: [Category!]</span>
+    # Chaine associée aux programmes (dans le cas d'une recherche par chaine)
+  <span class="cov10" title="1">  channel: Channel,</span>
+    # Eléments de la liste
+  <span class="cov10" title="1">  items: [Program!]</span>
+    # Poids de la liste (à utiliser pour ordonner les éléments)
+  <span class="cov10" title="1">  weight: Int!</span>
+    # Offset courant
+  <span class="cov10" title="1">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov10" title="1">  hasNext: Boolean!</span>
+    # Clé d'identification du bloc
+  <span class="cov0" title="0">  key: String</span>
+    # Infos techniques associée à la recommandation (présent uniquement en reco personnalisée)
+  <span class="cov0" title="0">  recoMetadata: RecoMetadata</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Liste de contenus recommandés
+  type RecommendationsConnector {
+    # Identifiant de la recommandation (uniquement en reco personnalisée)
+  <span class="cov0" title="0">  id: ID  @deprecated(reason:"Utiliser metadata à la place")</span>
+    # ID de l'algo de reco utilisé  (uniquement en reco personnalisée)
+  <span class="cov0" title="0">  engine: String @deprecated(reason:"Utiliser metadata à la place")</span>
+    # Nombre total d'éléments
+  <span class="cov10" title="1">  total: Int!</span>
+    # Nombre total d'éléments (liens de rebond freemium exclus)
+  <span class="cov0" title="0">  totalWithoutFreemium: Int!</span>
+    # Eléments de la liste
+  <span class="cov10" title="1">  items: [PlayListOrVideoOrFreemium!]</span>
+    # Poids de la recommandation (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov10" title="1">  hasNext: Boolean!</span>
+    # Infos techniques associée à la recommandation (présent uniquement en reco personnalisée)
+  <span class="cov0" title="0">  metadata: RecoMetadata</span>
+  }
+  # Liste de recherche de programmes
+  type SearchProgramConnector {
+    # Nombre total d'éléments
+  <span class="cov0" title="0">  total: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [Program!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+  }
+  # Liste de recherche de videos
+  type SearchVideoConnector {
+    # Nombre total d'éléments
+  <span class="cov0" title="0">  total: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [Video!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+  }
+  # Liste de saisons du programme
+  type SeasonConnector {
+    # Nombre total de saisons
+  <span class="cov0" title="0">  total: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [Season!]</span>
+    # Indique le type et l'ordre de tri appliqué sur la liste de saisons
+  <span class="cov0" title="0">  sort: Sort</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Liste de vignettes
+  type ThumbnailsConnector {
+    # Nombre total d'éléments
+  <span class="cov0" title="0">  total: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [ThumbArticleOrUrl!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Liste de videos ou liens de rebond freemium
+  type VideosConnector {
+    # Nombre total d'éléments
+  <span class="cov10" title="1">  total: Int!</span>
+    # Poids de la liste (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Nombre total d'éléments (liens de rebond freemium exclus)
+  <span class="cov0" title="0">  totalWithoutFreemium: Int!</span>
+    # Eléments de la liste
+  <span class="cov10" title="1">  items: [VideoOrFreemium!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov10" title="1">  hasNext: Boolean!</span>
+    # Infos techniques associée à la recommandation (présent uniquement en reco personnalisée)
+  <span class="cov0" title="0">  recoMetadata: RecoMetadata</span>
+    # Clé d'identification du bloc
+  <span class="cov0" title="0">  key: String</span>
+    # Indique le type et l'ordre de tri appliqué sur la liste de videos
+  <span class="cov0" title="0">  sort: Sort</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Liste de videos
+  type VideosOnlyConnector {
+    # Nombre total d'éléments
+  <span class="cov0" title="0">  total: Int!</span>
+    # Poids de la liste (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Eléments de la liste
+  <span class="cov0" title="0">  items: [Video!]</span>
+    # Offset courant
+  <span class="cov0" title="0">  offset: Int!</span>
+    # Indique si il existe une page suivante ou non
+  <span class="cov0" title="0">  hasNext: Boolean!</span>
+    # Indique le type et l'ordre de tri appliqué sur la liste de videos
+  <span class="cov0" title="0">  sort: Sort</span>
+  }
+  <span class="cov0" title="0"></span>
+  <span class="cov0" title="0">enum ApplicationType {</span>
+  <span class="cov0" title="0">    WEB </span>
+  <span class="cov0" title="0">    APP</span>
+  }
+  # Types de catégorie des programmes
+  <span class="cov0" title="0">enum CategoryType {</span>
+    # Séries télévisées (deprecated)
+  <span class="cov0" title="0">  SERIES</span>
+    # Emissions (deprecated)
+  <span class="cov0" title="0">  TV_SHOW </span>
+    # Infos et Sociétés (deprecated)
+  <span class="cov0" title="0">  INFOS </span>
+    # Sport (deprecated)
+  <span class="cov0" title="0">  SPORT</span>
+    # Jeunesse (deprecated)
+  <span class="cov0" title="0">  YOUTH</span>
+    # Catégorie principale Séries et fictions
+  <span class="cov0" title="0">  MAIN_SERIES_AND_FICTIONS</span>
+    # Catégorie principale Divertissements
+  <span class="cov0" title="0">  MAIN_ENTERTAINEMENT</span>
+    # Catégorie principale Infos, Mag et sports
+  <span class="cov0" title="0">  MAIN_INFOS_MAGAZINE_SPORTS</span>
+    # Catégorie principale Programmes Jeunesse
+  <span class="cov0" title="0">  MAIN_YOUTH</span>
+    # Catégorie principale Evénement ponctuel (ex : coupe du monde)
+  <span class="cov0" title="0">  MAIN_EVENT</span>
+    # Sous-catégorie fictions étrangères
+  <span class="cov0" title="0">  SUB_FOREIGN_FICTION</span>
+    # Sous-catégorie fictions françaises
+  <span class="cov0" title="0">  SUB_FRENCH_FICTION</span>
+    # Sous-catégorie séries
+  <span class="cov0" title="0">  SUB_SERIES</span>
+    # Sous-catégorie Magazine d'infos
+  <span class="cov0" title="0">  SUB_MAGAZINE_INFOS</span>
+    # Sous-catégorie Sport
+  <span class="cov0" title="0">  SUB_SPORT</span>
+    # Sous-catégorie infos
+  <span class="cov0" title="0">  SUB_INFOS</span>
+    # Sous-catégorie 3-6 ans
+  <span class="cov0" title="0">  SUB_THREE_TO_SIX_YEARS</span>
+    # Sous-catégorie 6-10 ans
+  <span class="cov0" title="0">  SUB_SIX_TO_TEN_YEARS</span>
+    # Sous-catégorie magazines
+  <span class="cov0" title="0">  SUB_MAGAZINE</span>
+    # Sous-catégories Jeux TV
+  <span class="cov0" title="0">  SUB_GAMES</span>
+    # Sous-catégories Divertissements
+  <span class="cov0" title="0">  SUB_ENTERTAINEMENT</span>
+  }
+  # Classification CSA
+  <span class="cov0" title="0">enum CsaRatingType {</span>
+    # Contenu réservé au 10 ans et plus
+  <span class="cov0" title="0">  CSA_10</span>
+    # Contenu réservé aux 12 ans et plus
+  <span class="cov0" title="0">  CSA_12</span>
+    # Contenu réservé aux 16 ans et plus
+  <span class="cov0" title="0">  CSA_16</span>
+    # Contenu réservé aux adultes
+  <span class="cov0" title="0">  CSA_18</span>
+    # Tout public
+  <span class="cov0" title="0">  CSA_ALL</span>
+  }
+  <span class="cov0" title="0">enum DeviceType {</span>
+  <span class="cov0" title="0">    SMARTPHONE </span>
+  <span class="cov0" title="0">    DESKTOP</span>
+  <span class="cov0" title="0">    TABLETTE</span>
+  }
+  # Types associés aux favoris
+  <span class="cov0" title="0">enum FavoriteType {</span>
+    # Favoris de type program
+  <span class="cov0" title="0">  PROGRAM</span>
+    # Favoris de type video
+  <span class="cov0" title="0">  VIDEO</span>
+  }
+  <span class="cov0" title="0">enum GenderType {</span>
+  <span class="cov0" title="0">    H</span>
+  <span class="cov0" title="0">    F</span>
+  }
+  # Types associés aux types de fichiers d'images
+  <span class="cov0" title="0">enum ImageFileType {</span>
+  <span class="cov0" title="0">    JPG</span>
+  <span class="cov0" title="0">    PNG</span>
+  <span class="cov0" title="0">    WEBP</span>
+  <span class="cov0" title="0">    MP4</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Types associés aux images
+  <span class="cov0" title="0">enum ImageType {</span>
+    # Vignettes (pour les videos, les playlists et les rebond freemium)
+  <span class="cov0" title="0">  THUMBNAIL</span>
+    # Vignettes au format large (pour les videos, les playlists et les rebond freemium)
+  <span class="cov0" title="0">  THUMBNAIL_LARGE</span>
+    # Logo (pour les chaines et les programmes)
+  <span class="cov0" title="0">  LOGO</span>
+    # Couverture (décoration haut de page)
+  <span class="cov0" title="0">  COVER</span>
+    # Arrière-plan pour cover animée
+  <span class="cov0" title="0">  ANIMATED_COVER_BACKGROUND</span>
+    # Avant-plan pour cover animée
+  <span class="cov0" title="0">  ANIMATED_COVER_FOREGROUND</span>
+    # Fond d'écran (principalement pour les programmes)
+  <span class="cov0" title="0">  BACKGROUND</span>
+    # Avant plan (principalement pour les programmes)
+  <span class="cov0" title="0">  FOREGROUND</span>
+    # Fond video pour les showpage
+  <span class="cov0" title="0">  VIDEO_BACKGROUND</span>
+    # Vignette pour les programmes
+  <span class="cov0" title="0">  PORTRAIT</span>
+    # Accroche graphique (pour les programmes)
+  <span class="cov0" title="0">  HOOK_BACKGROUND</span>
+    # Preview des vidéos (webp)
+  <span class="cov0" title="0">  PREVIEW</span>
+    # image live pour les chaines
+  <span class="cov0" title="0">  LIVE</span>
+  }
+  <span class="cov0" title="0"></span>
+  <span class="cov0" title="0">enum LastTypeType {</span>
+  <span class="cov0" title="0">    REPLAY</span>
+  <span class="cov0" title="0">    EXTRAIT</span>
+  <span class="cov0" title="0">    BONUS</span>
+  <span class="cov0" title="0">    LIVE</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Ordre de tri
+  <span class="cov0" title="0">enum OrderType {</span>
+    # Ordre ascendant
+  <span class="cov0" title="0">  ASC</span>
+    # Ordre descendant
+  <span class="cov0" title="0">  DESC</span>
+  }
+  <span class="cov0" title="0">enum OsType {</span>
+  <span class="cov0" title="0">    WINDOWS</span>
+  <span class="cov0" title="0">    IOS</span>
+  <span class="cov0" title="0">    ANDROID</span>
+  }
+  <span class="cov0" title="0">enum PersonaType {</span>
+  <span class="cov0" title="0">    PERSONA_0</span>
+  <span class="cov0" title="0">    PERSONA_1</span>
+  <span class="cov0" title="0">    PERSONA_2</span>
+  <span class="cov0" title="0">    PERSONA_3</span>
+  <span class="cov0" title="0">    PERSONA_4</span>
+  <span class="cov0" title="0">    PERSONA_5</span>
+  <span class="cov0" title="0">    PERSONA_DEFAULT</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Statut de lecture des vidéos
+  <span class="cov0" title="0">enum PlayingStatus {</span>
+    # Non lu
+  <span class="cov0" title="0">  UNPLAYED</span>
+    # En cours de lecture
+  <span class="cov0" title="0">  ON_GOING</span>
+    # Lu
+  <span class="cov0" title="0">  COMPLETED</span>
+  }
+  # Filtres pour la recherche des programmes par prefix
+  <span class="cov0" title="0">enum PrefixType {</span>
+      # Pour les programmes dont le nom commence par un chiffre
+  <span class="cov0" title="0">    NUMERIC</span>
+      # Pour les programmes dont le nom commence par un A
+  <span class="cov0" title="0">    ALPHA_A</span>
+      # Pour les programmes dont le nom commence par un B
+  <span class="cov0" title="0">    ALPHA_B</span>
+      # Pour les programmes dont le nom commence par un C
+  <span class="cov0" title="0">    ALPHA_C</span>
+      # Pour les programmes dont le nom commence par un D
+  <span class="cov0" title="0">    ALPHA_D</span>
+      # Pour les programmes dont le nom commence par un E
+  <span class="cov0" title="0">    ALPHA_E</span>
+      # Pour les programmes dont le nom commence par un F
+  <span class="cov0" title="0">    ALPHA_F</span>
+      # Pour les programmes dont le nom commence par un G
+  <span class="cov0" title="0">    ALPHA_G</span>
+      # Pour les programmes dont le nom commence par un H
+  <span class="cov0" title="0">    ALPHA_H</span>
+      # Pour les programmes dont le nom commence par un I
+  <span class="cov0" title="0">    ALPHA_I</span>
+      # Pour les programmes dont le nom commence par un J
+  <span class="cov0" title="0">    ALPHA_J</span>
+      # Pour les programmes dont le nom commence par un K
+  <span class="cov0" title="0">    ALPHA_K</span>
+      # Pour les programmes dont le nom commence par un L
+  <span class="cov0" title="0">    ALPHA_L</span>
+      # Pour les programmes dont le nom commence par un M
+  <span class="cov0" title="0">    ALPHA_M</span>
+      # Pour les programmes dont le nom commence par un N
+  <span class="cov0" title="0">    ALPHA_N</span>
+      # Pour les programmes dont le nom commence par un O
+  <span class="cov0" title="0">    ALPHA_O</span>
+      # Pour les programmes dont le nom commence par un P
+  <span class="cov0" title="0">    ALPHA_P</span>
+      # Pour les programmes dont le nom commence par un Q
+  <span class="cov0" title="0">    ALPHA_Q</span>
+      # Pour les programmes dont le nom commence par un R
+  <span class="cov0" title="0">    ALPHA_R</span>
+      # Pour les programmes dont le nom commence par un S
+  <span class="cov0" title="0">    ALPHA_S</span>
+      # Pour les programmes dont le nom commence par un T
+  <span class="cov0" title="0">    ALPHA_T</span>
+      # Pour les programmes dont le nom commence par un U
+  <span class="cov0" title="0">    ALPHA_U</span>
+      # Pour les programmes dont le nom commence par un V
+  <span class="cov0" title="0">    ALPHA_V</span>
+      # Pour les programmes dont le nom commence par un W
+  <span class="cov0" title="0">    ALPHA_W</span>
+      # Pour les programmes dont le nom commence par un X
+  <span class="cov0" title="0">    ALPHA_X</span>
+      # Pour les programmes dont le nom commence par un Y
+  <span class="cov0" title="0">    ALPHA_Y</span>
+      # Pour les programmes dont le nom commence par un Z
+  <span class="cov0" title="0">    ALPHA_Z</span>
+  }
+  # Engines de recommendations disponibles
+  <span class="cov0" title="0">enum RecommendationEngine {</span>
+    # Recommendation fallback catalogue
+  <span class="cov0" title="0">  FALLBACK</span>
+    # Recommendation de type top
+  <span class="cov0" title="0">  TP1TOP</span>
+    # Recommendation de type text-based
+  <span class="cov0" title="0">  TP1TB</span>
+  }
+  <span class="cov0" title="0"></span>
+  <span class="cov0" title="0">enum RefererType {</span>
+  <span class="cov0" title="0">    AMP</span>
+  <span class="cov0" title="0">    BING</span>
+  <span class="cov0" title="0">    ECOSIA</span>
+  <span class="cov0" title="0">    FACEBOOK</span>
+  <span class="cov0" title="0">    FLIPBOARD</span>
+  <span class="cov0" title="0">    GOOGLE</span>
+  <span class="cov0" title="0">    GOOGLEAPIS</span>
+  <span class="cov0" title="0">    GRATUIT</span>
+  <span class="cov0" title="0">    INSTAGRAM</span>
+  <span class="cov0" title="0">    MSN</span>
+  <span class="cov0" title="0">    MYWAY</span>
+  <span class="cov0" title="0">    NEWSLETTER</span>
+  <span class="cov0" title="0">    PROJECT</span>
+  <span class="cov0" title="0">    QWANT</span>
+  <span class="cov0" title="0">    TWITTER</span>
+  <span class="cov0" title="0">    UPDAY</span>
+  <span class="cov0" title="0">    WEBMASTER</span>
+  <span class="cov0" title="0">    YAHOO</span>
+  <span class="cov0" title="0">    YOUTUBE</span>
+  <span class="cov0" title="0">    NONE</span>
+  }
+  <span class="cov0" title="0">enum SortType {</span>
+    # Tri alphabétique
+  <span class="cov0" title="0">  TEXT</span>
+    # Tri par date
+  <span class="cov0" title="0">  DATE</span>
+    # Tri par date d'expiration
+  <span class="cov0" title="0">  EXPIRATION</span>
+    # Tri par episode
+  <span class="cov0" title="0">  EPISODE</span>
+    # Tri par season
+  <span class="cov0" title="0">  SEASON</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Types des vidéos
+  <span class="cov0" title="0">enum VideoType {</span>
+    # Contenu de type bonus
+  <span class="cov0" title="0">  BONUS</span>
+    # Contenu de type replay
+  <span class="cov0" title="0">  REPLAY</span>
+    # Contenu de type extrait
+  <span class="cov0" title="0">  EXTRACT</span>
+    # Autre type de vidéo
+  <span class="cov0" title="0">  OTHER</span>
+    # Contenu publicitaire
+  <span class="cov0" title="0">  ADVERTISEMENT</span>
+  }
+  # Contexte persona
+  <span class="cov0" title="0">input PersonaContext {</span>
+    # Service d'où vient l'utilisateur
+  <span class="cov0" title="0">  referer: RefererType,</span>
+    # Device de l'utilisateur
+  <span class="cov0" title="0">  device: DeviceType,</span>
+    # DeviceOs de l'utilisateur
+  <span class="cov0" title="0">  deviceOs: OsType,</span>
+    # Dernier programme de l'utilisateur
+  <span class="cov0" title="0">  lastProgramId: String,</span>
+    # Type du dernier contenu
+  <span class="cov0" title="0">  lastType: LastTypeType,</span>
+    # Dernier sous genre du programme de l'utilisateur
+  <span class="cov0" title="0">  lastDigitalProgramSubGenre: String,</span>
+    # Date anniversaire (format : 1976-12-03)
+  <span class="cov0" title="0">  birthDate: String,</span>
+    # Genre de l'utilisateur
+  <span class="cov0" title="0">  gender: GenderType</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Contexte poursuite de lecture
+  <span class="cov0" title="0">input PlayingContext {</span>
+    # Indique si la poursuite de lecture est liée à l'espace de confiance
+  <span class="cov0" title="0">  isSafe: Boolean</span>
+    # Indique si la poursuite de lecture est liée à une recommendation personnalisée
+  <span class="cov0" title="0">  isReco: Boolean</span>
+    # Indique si la pousuite de lecture est liée à une playlist
+  <span class="cov0" title="0">  playlistId: ID</span>
+  }
+  # Filtre pour les programmes
+  <span class="cov0" title="0">input ProgramFilter {</span>
+    # Rechercher les programmes par chaine
+  <span class="cov0" title="0">  channel: String</span>
+    # Rechercher les programmes par catégorie
+  <span class="cov0" title="0">  category: CategoryType</span>
+    # Rechercher par prefix
+  <span class="cov0" title="0">  startWith: PrefixType</span>
+  }
+  # Permet de définir le type de tri à utiliser
+  <span class="cov0" title="0">input SortByType {</span>
+    # Critère de tri
+  <span class="cov0" title="0">  type: SortType!</span>
+    # Ordre du tri
+  <span class="cov0" title="0">  order: OrderType!</span>
+  }
+  <span class="cov0" title="0">input UserContext {</span>
+  <span class="cov0" title="0">    persona: PersonaType!</span>
+  <span class="cov0" title="0">    application: ApplicationType!</span>
+  <span class="cov0" title="0">	device: DeviceType!</span>
+  <span class="cov0" title="0">	os: OsType!</span>
+  }
+  # Liste des mutations disponibles
+  type Mutation {
+    # MAJ des infos de lecture d'une vidéo
+  <span class="cov0" title="0">  updatePlayingInfos(id: ID!, elapsedTime: Int!): PlayingInfos</span>
+    # Ajouter un éléments aux favoris
+  <span class="cov0" title="0">  addToFavorites(id: ID!, ofType: FavoriteType = PROGRAM): Boolean</span>
+    # Supprimer un éléments des favoris
+  <span class="cov0" title="0">  removeFromFavorites(id: ID!, ofType: FavoriteType = PROGRAM): Boolean</span>
+    # Ajouter une video aux bookmarks
+  <span class="cov0" title="0">  addToBookmarks(id: ID!): Boolean</span>
+    # Supprimer une video des bookmarks
+  <span class="cov0" title="0">  removeFromBookmarks(id: ID!): Boolean</span>
+    # Permet de supprimer l'historique de lecture
+  <span class="cov0" title="0">  clearHistory: Boolean</span>
+    # Permet de supprimer tous les favoris
+  <span class="cov0" title="0">  clearFavorites: Boolean</span>
+    # Permet de supprimer tous les bookmarks
+  <span class="cov0" title="0">  clearBookmarks: Boolean</span>
+  }
+  # Liste des requêtes disponibles
+  type Query {
+    # Récupération des articles
+  <span class="cov10" title="1">  articles(channel: String, offset: Int = 0, limit: Int = 10): ArticlesConnector</span>
+    # Récupération d'un article par son identifiant
+  <span class="cov0" title="0">  articleById(id: String!): Article</span>
+    # Récupération d'un article par son slug
+  <span class="cov10" title="1">  articleBySlug(slug: String!, programSlug:String!): Article</span>
+    # Récupération des programmes du moment (appel paginé).
+  <span class="cov0" title="0">  currentPrograms(offset: Int = 0, limit: Int = 10): ProgramsConnector</span>
+    # Récupération des programmes par catégorie (appel paginé). Le champ category doit être une catégorie principale.
+  <span class="cov0" title="0">  programsByCategory(category: CategoryType!, offset: Int = 0, limit: Int = 10, sort: SortByType): ProgramsConnector</span>
+    # Récupération des programmes par sous-catégories (appel non paginé). Le champ mainCategory doit être une catégorie principale
+  <span class="cov10" title="1">  programsBySubCategory(mainCategory: CategoryType!, sort: SortByType): CategoryConnector</span>
+    # Récupération des programmes par chaine (appel paginé).
+  <span class="cov10" title="1">  programsByChannel(channel: ID!, offset: Int = 0, limit: Int = 10, sort: SortByType): ProgramsConnector</span>
+    # Récupération des liens de rebond freemiums (appels paginé)
+  <span class="cov0" title="0">  freemiums(offset: Int = 0, limit: Int = 10): FreemiumsConnector</span>
+    # Récupération d'un programme par id
+  <span class="cov10" title="1">  programById(id: ID!): Program</span>
+    # Récupération d'un programme par slug
+  <span class="cov10" title="1">  programBySlug(slug: String!): Program</span>
+    # Récupération des vidéos d'un programme
+  <span class="cov0" title="0">  videosByProgram(id: ID!, offset: Int = 0, limit: Int = 10, tag: String): VideosConnector @deprecated(reason:"Passer par le noeud video")</span>
+    # Obtenir la liste de lecture associées à une vidéo (et éventuellement une playlist). Aucun lien freemium ne sera remonté
+  <span class="cov0" title="0">  playlistForVideo(id: ID!, offset: Int = 0, limit: Int = 10, withFocus: Boolean = false, context: PlayingContext): VideosConnector</span>
+    # Obtenir la liste de lecture associées à une vidéo par son Id (et éventuellement une playlist). Aucun lien freemium ne sera remonté
+  <span class="cov0" title="0">  playlistForVideoById(id: ID!, offset: Int = 0, limit: Int = 10, withFocus: Boolean = false, context: PlayingContext): VideosConnector</span>
+    # Obtenir la liste de lecture associées à une vidéo par son slug (et éventuellement une playlist). Aucun lien freemium ne sera remonté
+  <span class="cov0" title="0">  playlistForVideoBySlug(slug: String!, programSlug: String!, offset: Int = 0, limit: Int = 10, withFocus: Boolean = false, context: PlayingContext): VideosConnector</span>
+    # Permet d'alimenter la section "espace de confiance". Retourne une recommandations de contenus tout public
+  <span class="cov0" title="0">  safeContent(offset: Int = 0, limit: Int = 10): RecommendationsConnector</span>
+    # Recherche de programmes
+  <span class="cov0" title="0">  searchPrograms(query: String!, offset: Int = 0, limit: Int = 10): SearchProgramConnector</span>
+    # Recherche de vidéos
+  <span class="cov0" title="0">  searchVideos(query: String!, offset: Int = 0, limit: Int = 10): SearchVideoConnector</span>
+    # Récupérer une vidéo par son ID (move ou id référentiel)
+  <span class="cov10" title="1">  videoById(id: ID!): Video</span>
+    # Récupération des infos utilisateur
+  <span class="cov0" title="0">  user(context: UserContext): User</span>
+    # Récupération d'une vidéo par slug
+  <span class="cov10" title="1">  videoBySlug(slug: String!, programSlug: String!): Video</span>
+    # Récupération des programmes TODO: catolog-services
+  <span class="cov10" title="1">  programs(context: UserContext, offset: Int = 0, limit: Int = 10, filter: ProgramFilter): ProgramsConnector</span>
+    # Récupération d'une catégorie
+  <span class="cov10" title="1">  category(ofType: CategoryType!): Category</span>
+    # Récupération d'une chaine par id
+  <span class="cov0" title="0">  channel(id: ID!): Channel</span>
+    # Récupération d'une chaine par slug
+  <span class="cov0" title="0">  channelBySlug(slug: String!): Channel</span>
+    # Récupération liste de vidéos par chaine (slug) et type
+  <span class="cov10" title="1">  videos(types: [VideoType!], channel: String, offset: Int = 0, limit: Int = 10, sort: SortByType): VideosConnector</span>
+    # Récupération des covers home
+  <span class="cov0" title="0">  homeCovers(context: UserContext): [Cover!]</span>
+    # Récupération des infos "live"
+  <span class="cov0" title="0">  live(offset: Int = 0, limit: Int = 10): LiveConnector</span>
+    # Récupération des personnalités
+  <span class="cov0" title="0">  personalities(offset: Int = 0, limit: Int = 10): PersonalitiesConnector</span>
+    # Récupération d'une personnalité par son identifiant
+  <span class="cov0" title="0">  personalityById(id: String!): Personality</span>
+    # Récupération d'une personnalité par son slug
+  <span class="cov0" title="0">  personalityBySlug(slug: String!): Personality</span>
+    # Récupération d'unu playlist par id
+  <span class="cov0" title="0">  playlistById(id: ID!): PlayList</span>
+    # Récupération d'une playlist par slug
+  <span class="cov0" title="0">  playlistBySlug(slug: String!): PlayList</span>
+  }
+  <span class="cov0" title="0"></span>
+  <span class="cov0" title="0">schema {</span>
+  <span class="cov0" title="0">  query: Query</span>
+  <span class="cov0" title="0">  mutation: Mutation</span>
+  }
+  type AccessibilityAttributes {
+  <span class="cov0" title="0">    hasFrenchAudioTrack:    Boolean!</span>
+  <span class="cov0" title="0">    hasOriginalAudioTrack:  Boolean!</span>
+  <span class="cov0" title="0">    hasDescriptionTrack:    Boolean!</span>
+  <span class="cov0" title="0">    hasFrenchSubtitles:     Boolean!</span>
+  <span class="cov0" title="0">    hasFrenchDeafSubtitles: Boolean!</span>
+  }
+  <span class="cov0" title="0"></span>
+  <span class="cov0" title="0">input AccessibilityAttributesFilter {</span>
+  <span class="cov0" title="0">    hasFrenchAudioTrack:    Boolean</span>
+  <span class="cov0" title="0">    hasOriginalAudioTrack:  Boolean</span>
+  <span class="cov0" title="0">    hasDescriptionTrack:    Boolean</span>
+  <span class="cov0" title="0">    hasFrenchSubtitles:     Boolean</span>
+  <span class="cov0" title="0">    hasFrenchDeafSubtitles: Boolean</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant un article
+  type Article {
+    # Identifiant unique d'un article
+  <span class="cov0" title="0">  id: ID!</span>
+    # Slug de l'article
+  <span class="cov0" title="0">  slug: String!</span>
+    # Date de publication
+  <span class="cov0" title="0">  publishAt: Time!</span>
+    # Date de création de l'article
+  <span class="cov0" title="0">  createdAt: Time!</span>
+    # Date de mise à jour de l'article
+  <span class="cov0" title="0">  updatedAt: Time!</span>
+    # Chaine liée à l'article
+  <span class="cov0" title="0">  channel: String!</span>
+    # Titre de l'article
+  <span class="cov0" title="0">  title: String!</span>
+    # Titre de l'article
+  <span class="cov0" title="0">  description: String!</span>
+    # Contenu de l'article
+  <span class="cov0" title="0">  content: String!</span>
+    # Thumbnail
+  <span class="cov0" title="0">  thumbnail: Image @deprecated(reason:"Utiliser l'entrée images à la place qui remonte thumbnail + cover")</span>
+    # Images de l'article (thumbnail, cover)
+  <span class="cov0" title="0">  images: [Image]!</span>
+    # Personnalités associées à l'article (potentiellement vide)
+  <span class="cov0" title="0">  personalities: [Personality]!</span>
+    # Programme associé à l'article
+  <span class="cov10" title="1">  program: Program!</span>
+    # Permet d'obtenir les articles en relation avec cet article
+  <span class="cov10" title="1">  relatedArticles(offset: Int = 0, limit: Int = 10): ArticlesConnector</span>
+    # Video associée à l'article (potentiellement vide)
+  <span class="cov0" title="0">  video: Video</span>
+    # Auteur de l'article
+  <span class="cov0" title="0">  author: Author</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant un auteur
+  type Author {
+    # E-mail de l'auteur
+  <span class="cov0" title="0">  email: String!</span>
+    # Nom de l'auteur
+  <span class="cov0" title="0">  name: String!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud réprésentant une categorie de programme
+  type Category {
+    # Identifiant unqiue de la categorie
+  <span class="cov10" title="1">  id: ID!</span>
+    # Libellé de la catégorie
+  <span class="cov10" title="1">  label: String!</span>
+    # La decoration associée à la catégorie
+  <span class="cov0" title="0">  decoration: Decoration</span>
+    # Type de la categorie
+  <span class="cov10" title="1">  type: CategoryType!</span>
+    # Lorsque la categorie est associée à un programme, indique si c'est la catégorie principale de ce programme
+  <span class="cov0" title="0">  main: Boolean!</span>
+    # Le slug de la catégorie
+  <span class="cov10" title="1">  slug: String!</span>
+  }
+  # Noeud représentant une chaine
+  type Channel {
+    # Id unqiue de la chaine
+  <span class="cov10" title="1">  id: ID!</span>
+    # Slug de la chaine
+  <span class="cov10" title="1">  slug: String!</span>
+    # Libellé de la chaine
+  <span class="cov0" title="0">  label: String!</span>
+    # Décoration associée à la chaine
+  <span class="cov10" title="1">  decoration: Decoration</span>
+    # Liste des vidéos associées à la chaîne (appel paginé). Il est possible de filtrer le type de vidéos via l'argument types et d'exclure les rebond freemium via withFreemium
+  <span class="cov0" title="0">  videos(types: [VideoType!], offset: Int = 0, limit: Int = 10, sort: SortByType): VideosConnector,</span>
+    # Live en cours
+  <span class="cov0" title="0">  live: Live</span>
+    # Liste des programmes
+  <span class="cov0" title="0">  programRecommendations(offset: Int = 0, limit: Int = 10): ProgramsConnector</span>
+  }
+  # Noeud représentant une mise avant de type Cover
+  type Cover {
+    # Id unique de la cover
+  <span class="cov0" title="0">  id: ID!</span>
+    # Décoration associée à la mise en avant
+  <span class="cov0" title="0">  decoration: Decoration</span>
+    # Article associé à la cover
+  <span class="cov0" title="0">  article: Article</span>
+    # Video associée à la cover
+  <span class="cov0" title="0">  video: Video</span>
+    # Programme associé à la cover
+  <span class="cov0" title="0">  program: Program</span>
+    # Live associé à la cover
+  <span class="cov0" title="0">  live: Live</span>
+    # URL associée à la cover
+  <span class="cov0" title="0">  url: String</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Ensemble des ressources dédiées à l'affichage des éléments
+  type Decoration {
+    # Libellé principal
+  <span class="cov10" title="1">  label: String!</span>
+    # Libellé secondaire
+  <span class="cov10" title="1">  subLabel: String</span>
+    # Libellé du programme (si contenu dépedant d'un programme)
+  <span class="cov0" title="0">  programLabel: String</span>
+    # Images associées à l'élément. Il est possible de filtrer par type d'image via l'argument types.
+  <span class="cov10" title="1">  images(types: [ImageType!]): [Image!]</span>
+    # Retourne (si elle existe) l'image associée au type demandé
+  <span class="cov10" title="1">  image(ofType: ImageType!): Image</span>
+    # Description
+  <span class="cov10" title="1">  description: String</span>
+    # Accroche (uniquement pour les programmes)
+  <span class="cov10" title="1">  hook: String</span>
+  }
+  # Noeud représentant une recommendation editoriale
+  type EditorialRecommendations {
+    # Id unique de la recommandation
+  <span class="cov10" title="1">  id: ID!</span>
+    # Poids de la recommandation (à utiliser pour ordonner les éléments)
+  <span class="cov10" title="1">  weight: Int!</span>
+    # Libellé de la recommandation
+  <span class="cov10" title="1">  label: String!</span>
+    # Décoration associée à la recommandation
+  <span class="cov0" title="0">  decoration: Decoration</span>
+    # Liste des contenus recommandés
+  <span class="cov10" title="1">  recommendations(offset: Int = 0, limit: Int = 10): RecommendationsConnector</span>
+  }
+  # Noeud représentant un lien de rebond freemium
+  type FreemiumLink {
+    # Id unique du lien
+  <span class="cov0" title="0">  id: ID!</span>
+    #Libellé du lien
+  <span class="cov0" title="0">  label: String!</span>
+    # Décoration associée lien
+  <span class="cov0" title="0">  decoration: Decoration</span>
+    # URL du lien
+  <span class="cov0" title="0">  url: String!</span>
+    # Prix (en centimes) du contenu
+  <span class="cov0" title="0">  price: Int!</span>
+    # Poids du lien (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+  }
+  # Informations relative à une image
+  type Image {
+    # Identifiant unique de l'image (id publish)
+  <span class="cov0" title="0">  id: ID!</span>
+    # Type de l'image
+  <span class="cov10" title="1">  type: ImageType!</span>
+    # Liste des sources disponibles
+  <span class="cov10" title="1">  sources(types: [ImageFileType!]): [SrcSet!]</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant un live
+  type Live {
+    # Identifiant unique du live
+  <span class="cov0" title="0">  id: ID!</span>
+    # Poids du live (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Titre du live
+  <span class="cov0" title="0">  title: String!</span>
+    # Décoration du live
+  <span class="cov0" title="0">  decoration: Decoration</span>
+    # Chaine de diffusion du live
+  <span class="cov0" title="0">  channel: Channel!</span>
+    # Programme diffusé
+  <span class="cov0" title="0">  program: Program</span>
+    # Date de début
+  <span class="cov0" title="0">  startAt: Time!</span>
+    # Date de fin
+  <span class="cov0" title="0">  endAt: Time!</span>
+    # Classification CSA de la video
+  <span class="cov0" title="0">  rating: CsaRatingType!</span>
+    # Progression (en %)
+  <span class="cov0" title="0">  progress: Int!</span>
+    # Indique si la barre de progression sera affiché ou non
+  <span class="cov0" title="0">  isTimeslotAvailable: Boolean!</span>
+  }
+  <span class="cov0" title="0"></span>
+  #Source remontant les information de surcharges, planifiées ou non, et l'indication de poursuite de lecture pour les vidéos
+  type OverrideProps {
+    # Id de l'override
+  <span class="cov0" title="0">  overridedId: String!</span>
+    # Flag de poursuite de lecture pour les surcharges planifiées
+  <span class="cov0" title="0">  withPursuit: Boolean</span>
+  }
+  # Noeud représentant une personnalité
+  type Personality {
+    # Identifiant unique d'une personnalité
+  <span class="cov0" title="0">  id: ID!</span>
+    # Slug unique d'une personnalité
+  <span class="cov0" title="0">  slug: String!</span>
+    # Titre d'une personnalité
+  <span class="cov0" title="0">  title: String</span>
+    # Label front d'une personnalité
+  <span class="cov0" title="0">  label: String</span>
+    # Prénom d'une personnalité
+  <span class="cov0" title="0">  firstname: String</span>
+    # Nom de famille d'une personnalité
+  <span class="cov0" title="0">  lastname: String</span>
+    # Libellé du travail d'une personnalité
+  <span class="cov0" title="0">  job: String</span>
+    # Date d'anniversaire d'une personnalité
+  <span class="cov0" title="0">  birthday: String</span>
+    # Ville de naissance d'une personnalité
+  <span class="cov0" title="0">  birthcity: String</span>
+    # Contenu biographique d'une personnalité
+  <span class="cov0" title="0">  biography: String</span>
+    # Comptes des réseaux sociaux de la personnalité
+  <span class="cov0" title="0">  social: PersonalitySocialProperties</span>
+    # Images associées à la personnalité
+  <span class="cov0" title="0">  images: [Image]!</span>
+    # Personnalités associées à la personnalité
+  <span class="cov0" title="0">  related: [Personality]!</span>
+    # Date de publication
+  <span class="cov0" title="0">  publishAt: Time!</span>
+    # Date d'expiration
+  <span class="cov0" title="0">  expireAt: Time!</span>
+    # Date de création
+  <span class="cov0" title="0">  createdAt: Time!</span>
+    # Date de mise à jour
+  <span class="cov0" title="0">  updatedAt: Time!</span>
+    # Récupération des articles dont la personnalité est associée
+  <span class="cov0" title="0">  articles(offset: Int = 0, limit: Int = 10): ArticlesConnector</span>
+    # Récupération des programmes dont la personnalité est associée
+  <span class="cov0" title="0">  programs(offset: Int = 0, limit: Int = 10): ProgramsConnector</span>
+    # Récupération liste de vidéos dont la personnalité est associée
+  <span class="cov0" title="0">  videos(types: [VideoType!], offset: Int = 0, limit: Int = 10, sort: SortByType): VideosConnector</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant les propriétés d'une personnalité
+  type PersonalitySocialProperties {
+    # Label du compte Twitter
+  <span class="cov0" title="0">  twitterLabel: String</span>
+    # Nom du compte Twitter
+  <span class="cov0" title="0">  twitterAccount: String</span>
+    # Label du compte Instagram
+  <span class="cov0" title="0">  instagramLabel: String</span>
+    # Nom du compte Instagram
+  <span class="cov0" title="0">  instagramAccount: String</span>
+    # Label du compte Facebook
+  <span class="cov0" title="0">  facebookLabel: String</span>
+    # Nom du compte Facebook
+  <span class="cov0" title="0">  facebookAccount: String</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Informations de lecture d'une vidéo
+  type PlayingInfos {
+    # Durée de la vidéo (en secondes)
+  <span class="cov0" title="0">  duration: Int!</span>
+    # Nombre de jour restants pendant lesquels la vidéo est disponible
+  <span class="cov0" title="0">  remainingDays: Int!</span>
+    # Statut de lecture
+  <span class="cov0" title="0">  status: PlayingStatus!</span>
+    # Temps de lecture écoulé
+  <span class="cov0" title="0">  elapsedTime: Int!</span>
+  }
+  # Noeud représentant une playlist
+  type PlayList {
+    # Id unique de la playlist (id publish)
+  <span class="cov0" title="0">  id: ID!</span>
+    # Slug de playlist
+  <span class="cov0" title="0">  slug: String!</span>
+    # Date de publication
+  <span class="cov0" title="0">  publishAt: Time!</span>
+    # Id de la première vidéo à lire
+  <span class="cov0" title="0">  firstVideoToPlay: Video</span>
+    # Décoration associée à la playlist
+  <span class="cov0" title="0">  decoration: Decoration</span>
+    # Titre de la playlist
+  <span class="cov0" title="0">  title: String!</span>
+    # Liste des vidéos associées à la playlist (appel paginé). Il est possible de filtrer le type de vidéos via l'argument types.
+  <span class="cov0" title="0">  videos(types: [VideoType!], offset: Int = 0, limit: Int = 10): VideosConnector</span>
+    # Poids de la playlist (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Durée totale de la playlist (en secondes)
+  <span class="cov0" title="0">  totalDuration: Int!</span>
+    # Classification CSA de la playlist
+  <span class="cov0" title="0">  rating: CsaRatingType!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant un programme
+  type Program {
+    # Identifiant unique du programme (id publish)
+  <span class="cov10" title="1">  id: ID!</span>
+    # Slug du programme
+  <span class="cov10" title="1">  slug: String!</span>
+    # Editeur du programme
+  <span class="cov0" title="0">  editor: String!</span>
+    # Décoration du programme
+  <span class="cov10" title="1">  decoration: Decoration</span>
+    # Nom du programme
+  <span class="cov0" title="0">  name: String!</span>
+    # Catégories associées au programme (il est possible de récupérer uniquement la catégorie principale en utilisant le filtre mainOnly)
+  <span class="cov10" title="1">  categories(mainOnly: Boolean = false): [Category!]!</span>
+    # Liste des vidéos associées au programme (appel paginé). Il est possible de filtrer le type de vidéos via l'argument types et d'exclure les rebond freemium via withFreemium
+  <span class="cov10" title="1">  videos(types: [VideoType!], offset: Int = 0, limit: Int = 10, withFreemium: Boolean = true, sort: SortByType): VideosConnector</span>
+    # Liste des playlists associées au programme (appel paginé)
+  <span class="cov10" title="1">  playlists(offset: Int = 0, limit: Int = 10): PlayListsConnector</span>
+    # Indique si il s'agit d'un programme favoris
+  <span class="cov10" title="1">  isFavorite: Boolean!</span>
+    # Poids de la vidéo (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Chaine de diffusion principale
+  <span class="cov10" title="1">  mainChannel: Channel!</span>
+    # Chaine initiale du programme
+  <span class="cov10" title="1">  initialChannel: Channel!</span>
+    # Liste des recommandations editoriales (il est possible de limiter le nombre de recommandations via l'argument limit)
+  <span class="cov10" title="1">  editorialRecommendations(limit: Int = 10): [EditorialRecommendations]</span>
+    # Sélection par id d'une recommendation editoriales
+  <span class="cov0" title="0">  editorialRecommendationsById(id: ID!): EditorialRecommendations</span>
+    # Personnalités associées au programme (potentiellement vide)
+  <span class="cov0" title="0">  personalities: [Personality]!</span>
+    # Permet d'obtenir un sélection de programmes recommandés (par rapport au programme courant)
+  <span class="cov10" title="1">  relatedPrograms(offset: Int = 0, limit: Int = 10): ProgramsConnector</span>
+    # Permet d'obtenir les articles liés à ce programme
+  <span class="cov10" title="1">  articles(offset: Int = 0, limit: Int = 10): ArticlesConnector</span>
+    # Permet d'obtenir la sélection multi-vignettes liée à ce programme
+  <span class="cov0" title="0">  thumbs: Thumbs</span>
+    # Indique si il s'agit d'un programme uniquement digital
+  <span class="cov0" title="0">  isFullyDigital: Boolean!</span>
+    # Permet d'obtenir l'information du live si le programme est en cours de diffusion sur le direct
+  <span class="cov0" title="0">  live : Live</span>
+  <span class="cov0" title="0">  videosByAccessibilityAttributes(attributes: AccessibilityAttributesFilter!, offset: Int = 0, limit: Int = 10, sort: SortByType): VideosConnector</span>
+    # Permet d'obtenir une saison spécifique du programme
+  <span class="cov0" title="0">  season(number: Int = 1): Season</span>
+    # Liste de toute les saisons associées au programme
+  <span class="cov0" title="0">  seasons(sort: SortByType): SeasonConnector</span>
+  }
+  <span class="cov0" title="0"></span>
+  #Noeud représentant les infos techniques associées à une recommandation personnalisées
+  type RecoMetadata {
+    # Identifiant de la recommandation
+  <span class="cov0" title="0">  id: ID!</span>
+    # ID de l'algo de reco réellement utilisé
+  <span class="cov0" title="0">  engine: String! @deprecated(reason:"Utiliser engineExecuted à la place")</span>
+    # ID de l'algo de reco demandé
+  <span class="cov0" title="0">  engineRequired: String!</span>
+    # ID de l'algo de reco réellement utilisé
+  <span class="cov0" title="0">  engineExecuted: String!</span>
+    # Persona demandé pour la recommendation
+  <span class="cov0" title="0">  personaRequired: String!</span>
+    # Persona réellement utilisé pour la recommendation
+  <span class="cov0" title="0">  personaExecuted: String!</span>
+    # Règles de reco appliquées
+  <span class="cov0" title="0">  rules: String</span>
+    # Type de reco
+  <span class="cov0" title="0">  recoType: String</span>
+    # Premiers ID de la reco
+  <span class="cov0" title="0">  firstIDs: String</span>
+    # ID des program override
+  <span class="cov0" title="0">  overridedProgramIDs: [OverrideProps!]</span>
+    # ID des video override
+  <span class="cov0" title="0">  overridedVideoIDs: [OverrideProps!]</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant un saison du programme
+  type Season {
+    # Numero de saison
+  <span class="cov0" title="0">  number: Int!</span>
+    # Liste des vidéos associées a une saison (appel paginé)
+  <span class="cov0" title="0">  videos(offset: Int = 0, limit: Int = 10, sort: SortByType): VideosConnector</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Permet de retourner le type de tri à utiliser
+  type Sort {
+    # Critère de tri
+  <span class="cov0" title="0">  type: SortType!</span>
+    # Ordre du tri
+  <span class="cov0" title="0">  order: OrderType!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Source (relative) d'une image
+  type SrcSet {
+    # url (relative) de l'image
+  <span class="cov10" title="1">  src: String!</span>
+    # URL mytf1 de l'image (potentiellement vide pour les images spécifiques IPTV qui n'existent pas sur mytf1)
+  <span class="cov0" title="0">  url: String</span>
+    # media query (ex : (min-width :1024px))
+  <span class="cov0" title="0">  media: String</span>
+    # media width (ex : 255)
+  <span class="cov0" title="0">  width: String</span>
+    # media type (ex : webp)
+  <span class="cov0" title="0">  type: String</span>
+  }
+  # Regroupement de programmes par sous-catégorie
+  type SubCategory {
+    # Nombre total de programmes
+  <span class="cov10" title="1">  total: Int!</span>
+    # Poids de la liste (à utiliser pour ordonner les éléments).
+  <span class="cov10" title="1">  weight: Int!</span>
+    # SousCategorie des programmes
+  <span class="cov10" title="1">  SubCategory: Category</span>
+    # Liste des programmes
+  <span class="cov10" title="1">  items: [Program!]</span>
+    # Clé d'identification du bloc
+  <span class="cov0" title="0">  key: String</span>
+  }
+  # Noeud représentant un tag
+  type Tag {
+    # Label du tag
+  <span class="cov0" title="0">  label: String!</span>
+    # Nom du tag
+  <span class="cov0" title="0">  name: String!</span>
+    # Slug du tag
+  <span class="cov0" title="0">  slug: String!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant une vignette de type article
+  type ThumbArticle {
+    # Titre de la vignette
+  <span class="cov0" title="0">  title: String!</span>
+    # Image associée à la vignette
+  <span class="cov0" title="0">  image: Image</span>
+    # Article associé à la vignette
+  <span class="cov0" title="0">  article: Article!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant une vignette de type URL
+  type ThumbUrl {
+    # Titre de la vignette
+  <span class="cov0" title="0">  title: String!</span>
+    # Image associée à la vignette
+  <span class="cov0" title="0">  image: Image</span>
+    # URL du lien associé à la vignette
+  <span class="cov0" title="0">  url: String!</span>
+  }
+  <span class="cov0" title="0"></span>
+  # Noeud représentant une sélection multi-vignette
+  type Thumbs {
+    # Titre de la sélection multi-vignette
+  <span class="cov0" title="0">  title: String!</span>
+    # Liste de vignettes
+  <span class="cov0" title="0">  thumbnails: [ThumbArticleOrUrl!]</span>
+  }
+  <span class="cov0" title="0"></span>
+  <span class="cov0" title="0">scalar Time</span>
+  # Noeud représentant un utilisateur
+  type User {
+    # Id de l'utilisateur
+  <span class="cov0" title="0">  id: ID!</span>
+    # Login de l'utilisateur
+  <span class="cov0" title="0">  login: String!</span>
+    # Email de l'utilisateur
+  <span class="cov0" title="0">  email: String</span>
+    # Date de naissance de l'utilisateur
+  <span class="cov0" title="0">  birthDate: String!</span>
+    # Liste des programmes favoris de l'utilisateur (appel paginé). Il est possible de filtrer par categorie via l'argument categories.
+  <span class="cov0" title="0">  favorites(categories: [CategoryType!], offset: Int = 0, limit: Int = 10): ProgramsConnector</span>
+    # Liste des playlist de l'utilisateur (appel paginé).
+  <span class="cov0" title="0">  playlists(offset: Int = 0, limit: Int = 10): PlayListsConnector</span>
+    # Recuperation des bookmarks
+  <span class="cov0" title="0">  bookmarks(types: [VideoType!], offset: Int = 0, limit: Int = 10, sort: SortByType): VideosOnlyConnector</span>
+    # Historique de lecture de l'utilisateur (appel paginé). Il est possible de filtrer par type de vidéos via l'argument types.
+  <span class="cov0" title="0">  history(types: [VideoType!], offset: Int = 0, limit: Int = 10): VideosConnector</span>
+    # Recommandation de vidéos personnalisée (appel paginé)
+  <span class="cov0" title="0">  recommendations(videoId: ID, engine: RecommendationEngine, context: UserContext, offset: Int = 0, limit: Int = 10, videoOnly: Boolean = true): RecommendationsConnector</span>
+    # Recommandation de programmes personnalisée (appel paginé)
+  <span class="cov0" title="0">  programRecommendations(programId: ID, videoId: ID, engine: RecommendationEngine, context: UserContext, offset: Int = 0, limit: Int = 10): ProgramsConnector</span>
+  <span class="cov0" title="0">  programRecommandations(offset: Int = 0, limit: Int = 10): ProgramsConnector  @deprecated(reason:"Utiliser programRecommendations à la place")</span>
+    # Recuperation du persona
+  <span class="cov0" title="0">  persona(context: PersonaContext): PersonaType!</span>
+  }
+  <span class="cov0" title="0"></span>
+  #Noeud représentant une vidéos
+  type Video {
+    # Identifiant unique de la vidéo (id referentiel)
+  <span class="cov0" title="0">  id: ID!</span>
+    # Identifiant move de la vidéo
+  <span class="cov0" title="0">  moveId: String! @deprecated(reason:"Ce champ a été supprimé")</span>
+    # Identifiant de stream de la vidéo (faiId ou watId),
+  <span class="cov0" title="0">  streamId: ID!</span>
+    # Identifiant Emission au sens emission antenne (broadcast TV),
+  <span class="cov0" title="0">  emId: String</span>
+    # Numéro d'épisode de la vidéo
+  <span class="cov0" title="0">  episode: Int</span>
+    # Numéro de saison de la vidéo
+  <span class="cov0" title="0">  season: Int</span>
+    # Indique si il s'agit d'un contenu sécurisé,
+  <span class="cov0" title="0">  secure: Boolean!</span>
+    # Slug de la vidéo
+  <span class="cov0" title="0">  slug: String!</span>
+    # Décoration associée à la vidéo
+  <span class="cov10" title="1">  decoration: Decoration</span>
+    # Liste des tags liés à la vidéo
+  <span class="cov0" title="0">  tags: [Tag!]</span>
+    # Titre de la vidéo
+  <span class="cov0" title="0">  title: String!</span>
+    # Classification CSA de la video
+  <span class="cov0" title="0">  rating: CsaRatingType!</span>
+    # Type de la vidéo
+  <span class="cov0" title="0">  type: VideoType!</span>
+    # Poids de la vidéo (à utiliser pour ordonner les éléments)
+  <span class="cov0" title="0">  weight: Int!</span>
+    # Infos de lecture de la vidéo
+  <span class="cov0" title="0">  playingInfos: PlayingInfos</span>
+    # Dans le cas d'une recherche par vidéo, indique si c'est la vidéo concernée (ex : playlistForVideo)
+  <span class="cov0" title="0">  selected: Boolean!</span>
+    # Date de la vidéo
+  <span class="cov0" title="0">  date: Time!</span>
+    # URL mytf1 de la vidéo
+  <span class="cov0" title="0">  url: String!</span>
+    # Personnalités associées à la vidéo (potentiellement vide)
+  <span class="cov10" title="1">  personalities: [Personality]!</span>
+    # Programme associé à la vidéo (potentiellement vide, ex : pubs)
+  <span class="cov10" title="1">  program: Program</span>
+    # [MOCK] Indique si il s'agit d'une vidéo en bookmark
+  <span class="cov0" title="0">  isBookmarked: Boolean!</span>
+  <span class="cov0" title="0">  accessibilityAttributes: AccessibilityAttributes</span>
+  }
+  <span class="cov0" title="0"></span>
+  <span class="cov0" title="0">union VideoOrFreemium = Video | FreemiumLink</span>
+  <span class="cov0" title="0">union PlayListOrVideoOrFreemium = PlayList | Video | FreemiumLink</span>
+  <span class="cov0" title="0">union ThumbArticleOrUrl = ThumbArticle | ThumbUrl</span>
+  <span class="cov0" title="0"></span>
+ 
+           </pre>
+       </div>
+   </body>
+</html>

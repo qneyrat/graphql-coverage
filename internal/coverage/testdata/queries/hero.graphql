@@ -1,0 +1,6 @@
+{
+ hero(episode: EMPIRE) {
+     id
+     name
+ }
+}
