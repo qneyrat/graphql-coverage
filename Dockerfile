@@ -6,4 +6,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -mod vendor -ldflags="-s -w" -o /graphql-c
 
 FROM alpine:3.10.1
 RUN apk update && apk add --no-cache tzdata ca-certificates
-COPY --from=builder /graphql-coverage /
+COPY --from=builder /graphql-coverage /bin
