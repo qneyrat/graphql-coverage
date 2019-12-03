@@ -51,6 +51,7 @@ type CoverLine struct {
 	Line int
 	Count int
 	Text string
+	Ignored bool
 }
 
 type Calculator struct {

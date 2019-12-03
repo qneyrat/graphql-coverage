@@ -23,8 +23,6 @@ func DecoratePreRunFunc(c *Context) func(cmd *cobra.Command, args []string) erro
 					return nil
 				}
 
-				fmt.Println("File found:", path)
-
 				file, err := os.Open(path)
 				if err != nil {
 					return err

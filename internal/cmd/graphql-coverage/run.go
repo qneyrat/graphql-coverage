@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
 
 	"github.com/qneyrat/graphql-coverage/internal/coverage"
 	"github.com/qneyrat/graphql-coverage/internal/output"
@@ -30,22 +31,17 @@ func DecorateRunFunc(c *Context) func(cmd *cobra.Command, args []string) error {
 
 		coverFile := coverage.WrappedCoverFile{[]coverage.CoverLine{}}
 		scanner := bufio.NewScanner(schemaFile)
-		var count int
+		re := regexp.MustCompile(`^\s*(#|}|type).*$`)
+		var line int
 		for scanner.Scan() {
-			count++
-			coverageCount, ok := coverageMap[count]
-			if !ok {
-				coverFile.CoverFile = append(coverFile.CoverFile, coverage.CoverLine{
-					Line:  count,
-					Text:  scanner.Text(),
-				})
-				continue
-			}
-
+			line++
+			coverageCount, _ := coverageMap[line]
+			text := scanner.Text()
 			coverFile.CoverFile = append(coverFile.CoverFile, coverage.CoverLine{
-				Line:  count,
+				Line:  line,
 				Count: coverageCount,
-				Text:  scanner.Text(),
+				Text:  text,
+				Ignored: re.Match([]byte(text)),
 			})
 		}
 
@@ -58,14 +54,23 @@ func DecorateRunFunc(c *Context) func(cmd *cobra.Command, args []string) error {
 		}
 
 		if *c.HtmlOutput {
-			if err := output.Output(*c.Output, coverFile); err != nil {
+			writer, err := os.OpenFile(*c.Output, os.O_RDWR|os.O_CREATE, 0660)
+			if err != nil {
+				return err
+			}
+			if err := output.Output(writer, coverFile); err != nil {
 				return err
 			}
 		}
 
+		coverageCount := 0
 		for _, coverLine := range coverFile.CoverFile {
-			fmt.Println(coverLine.Line, coverLine.Text, coverLine.Count)
+			if !coverLine.Ignored && coverLine.Count > 0 {
+				coverageCount++
+			}
 		}
+
+		fmt.Printf("coverage: %.2f%% \n", float64(coverageCount)/float64(len(coverFile.CoverFile))*100)
 
 		return nil
 	}

@@ -1,7 +1,6 @@
 package graphql_coverage
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 
@@ -27,9 +26,6 @@ func DecorateArgsFunc(c *Context) cobra.PositionalArgs {
 		default:
 			return fmt.Errorf("file or dir %s doesnt exist", args[0])
 		}
-
-		loggableContext, _ := json.Marshal(c)
-		fmt.Println("Context with flags:", string(loggableContext))
 
 		return nil
 	}

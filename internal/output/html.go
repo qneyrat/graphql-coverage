@@ -2,8 +2,7 @@ package output
 
 import (
 	"fmt"
-	"os"
-	"strings"
+	"io"
 	"text/template"
 
 	"github.com/qneyrat/graphql-coverage/internal/coverage"
@@ -85,14 +84,12 @@ const templateText = `
 </html>
 `
 
-func Output(filename string, data coverage.WrappedCoverFile) error {
+func Output(writer io.Writer, data coverage.WrappedCoverFile) error {
+
 	funcMap := template.FuncMap{
 		"span": func(coverLine coverage.CoverLine) string {
-			if coverLine.Count <= 0 && (
-				strings.HasPrefix(strings.Replace(coverLine.Text, " ", "", -1), "#") ||
-					strings.HasPrefix(coverLine.Text, "type") ||
-					strings.HasPrefix(coverLine.Text, "}")) {
-				return coverLine.Text+"\n"
+			if coverLine.Ignored {
+				return fmt.Sprintf("<span class=\"cov0\" title=\"0\">%s</span>\n", coverLine.Text)
 			}
 
 			if coverLine.Count > 0 {
@@ -108,10 +105,5 @@ func Output(filename string, data coverage.WrappedCoverFile) error {
 		return err
 	}
 
-	output, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0660)
-	if err != nil {
-		return err
-	}
-
-	return tmpl.Execute(output, data)
+	return tmpl.Execute(writer, data)
 }
