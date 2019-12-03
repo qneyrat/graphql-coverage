@@ -30,7 +30,7 @@ func WithFlags(flags *flag.FlagSet) *Context {
 			".graphql",
 			"filter to search graphql queries when arg is dir",
 		),
-		HtmlOutput: flags.Bool("html", true, "html output"),
+		HtmlOutput: flags.Bool("html", false, "html output"),
 		IsJson: flags.Bool("json", false, "json input graphql query"),
 		IsDir: false,
 		InputFiles: nil,
